@@ -1,10 +1,12 @@
 {
-  "version": "2.2.0",
+  "version": "2.6.2",
+  "release_version": "",
+  "released_at": "",
   "summary": {
-    "title": "Вариант 11 — Сервис доставки еды",
-    "owner": "Студент (Вариант 11)",
-    "description": "Учебная модель угроз сервиса доставки еды (STRIDE + LINDDUN). Цель нарушителя: заказывать еду за чужой счёт. Защищаемые ПДн: адреса и привычки клиентов.",
-    "id": 11
+    "title": "Вариант 11 — Доставка еды",
+    "owner": "Практика, неделя 6 (Вариант 11)",
+    "description": "Учебная модель угроз сервиса доставки еды. Нарушители: внешний злоумышленник и недобросовестный пользователь. Цель атакующего: заказывать еду за чужой счёт. Персональные данные: адреса и привычки клиентов.",
+    "id": 0
   },
   "detail": {
     "contributors": [
@@ -17,201 +19,823 @@
         "id": 0,
         "title": "Доставка еды: STRIDE",
         "diagramType": "STRIDE",
-        "placeholder": "Диаграмма STRIDE для варианта 11",
+        "placeholder": "Модель угроз STRIDE для сервиса доставки еды (Вариант 11)",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
-        "version": "2.2.0",
+        "version": "2.6.2",
         "cells": [
           {
+            "position": { "x": 240, "y": 20 },
+            "size": { "width": 540, "height": 400 },
+            "attrs": {
+              "text": { "text": "Облачный контур доставки" },
+              "header": { "fill": "transparent" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": "5 5" }
+            },
+            "visible": true,
+            "shape": "tm.BoundaryBox",
+            "id": "b1111111-1111-4111-8111-111111111001",
+            "zIndex": 1,
+            "data": {
+              "name": "Облачный контур доставки",
+              "description": "Граница доверия: Интернет | ЦОД сервиса доставки",
+              "type": "tm.BoundaryBox",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 510, "y": 450 },
+            "size": { "width": 270, "height": 140 },
+            "attrs": {
+              "text": { "text": "Внешний платёжный провайдер" },
+              "header": { "fill": "transparent" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": "5 5" }
+            },
+            "visible": true,
+            "shape": "tm.BoundaryBox",
+            "id": "b1111111-1111-4111-8111-111111111002",
+            "zIndex": 1,
+            "data": {
+              "name": "Внешний платёжный провайдер",
+              "description": "Граница доверия: ЦОД доставки | Платёжный шлюз",
+              "type": "tm.BoundaryBox",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
             "position": { "x": 40, "y": 80 },
-            "size": { "width": 130, "height": 60 },
+            "size": { "width": 140, "height": 70 },
+            "attrs": {
+              "text": { "text": "Клиент" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Actor",
-            "id": "actor-client",
+            "id": "a1111111-1111-4111-8111-111111111001",
+            "zIndex": 10,
             "data": {
               "name": "Клиент",
-              "description": "Заказчик еды в мобильном или веб-приложении",
+              "description": "Пользователь приложения доставки еды",
               "type": "tm.Actor",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "providesAuthentication": false,
+              "hasOpenThreats": true,
               "threats": [
                 {
-                  "id": "threat-s-1",
-                  "title": "Захват аккаунта с привязанной картой (Credential Stuffing)",
+                  "id": "t1111111-1111-4111-8111-111111111001",
+                  "number": 1,
+                  "title": "Вход в чужой аккаунт с привязанной картой (Credential Stuffing)",
                   "status": "Open",
                   "severity": "High",
                   "type": "Spoofing",
-                  "description": "Злоумышленник подбирает пароль к аккаунту клиента и оформляет заказ еды за его счёт на свой адрес.",
-                  "mitigation": "Вход через Passkey/WebAuthn и обязательный Step-up MFA при смене адреса доставки.",
-                  "modelType": "STRIDE"
+                  "score": "",
+                  "description": "Злоумышленник через форму входа подбирает утёкший пароль клиента и оформляет доставку еды за его счёт на свой адрес.",
+                  "mitigation": "Вход по Passkey / WebAuthn и обязательный Step-up MFA при смене адреса доставки.",
+                  "modelType": "STRIDE",
+                  "new": false
                 }
               ]
             }
           },
           {
-            "position": { "x": 40, "y": 260 },
-            "size": { "width": 130, "height": 60 },
+            "position": { "x": 40, "y": 280 },
+            "size": { "width": 140, "height": 70 },
+            "attrs": {
+              "text": { "text": "Курьер" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Actor",
-            "id": "actor-courier",
+            "id": "a1111111-1111-4111-8111-111111111002",
+            "zIndex": 10,
             "data": {
               "name": "Курьер",
-              "description": "Исполнитель доставки с курьерским приложением",
+              "description": "Исполнитель доставки заказов",
               "type": "tm.Actor",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "providesAuthentication": false,
+              "hasOpenThreats": false,
               "threats": []
             }
           },
           {
-            "position": { "x": 300, "y": 80 },
+            "position": { "x": 290, "y": 70 },
             "size": { "width": 120, "height": 120 },
+            "attrs": {
+              "text": { "text": "API приложения" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Process",
-            "id": "proc-api",
+            "id": "p1111111-1111-4111-8111-111111111001",
+            "zIndex": 10,
             "data": {
               "name": "API приложения",
-              "description": "Приём заказов и отмена с возвратом денег",
+              "description": "Приём заказов и отмена заказа с возвратом денег",
               "type": "tm.Process",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "privilegeLevel": "User",
+              "hasOpenThreats": true,
               "threats": [
                 {
-                  "id": "threat-r-1",
-                  "title": "Отказ от факта получения заказа при возврате денег",
+                  "id": "t1111111-1111-4111-8111-111111111003",
+                  "number": 3,
+                  "title": "Ложная отмена заказа с возвратом денег после получения еды",
                   "status": "Open",
                   "severity": "Medium",
                   "type": "Repudiation",
-                  "description": "Клиент вызывает отмену заказа с возвратом средств после фактического получения еды, отрицая доставку.",
-                  "mitigation": "Журнал аудита (WORM), подтверждение вручения одноразовым PIN-кодом клиента и фотофиксация.",
-                  "modelType": "STRIDE"
+                  "score": "",
+                  "description": "Недобросовестный клиент или курьер отрицает факт передачи заказа и вызывает возврат средств.",
+                  "mitigation": "Неизменяемый журнал аудита, подтверждение вручения одноразовым PIN-кодом клиента и фотофиксация.",
+                  "modelType": "STRIDE",
+                  "new": false
                 },
                 {
-                  "id": "threat-d-1",
-                  "title": "Массовое создание фейковых заказов ботами",
+                  "id": "t1111111-1111-4111-8111-111111111005",
+                  "number": 5,
+                  "title": "Бот-атака массовыми заказами и блокировка всех курьеров",
                   "status": "Open",
                   "severity": "High",
                   "type": "Denial of service",
-                  "description": "Боты создают тысячи заказов, блокируя всех доступных курьеров и перегружая API.",
-                  "mitigation": "Rate limiting на API Gateway, капча и лимит активных заказов на пользователя.",
-                  "modelType": "STRIDE"
+                  "score": "",
+                  "description": "Боты массово создают заказы без предоплаты, занимая всех свободных курьеров и перегружая сервис приёма заказов.",
+                  "mitigation": "Rate limiting на API Gateway, антибот-защита и лимит активных заказов на один аккаунт.",
+                  "modelType": "STRIDE",
+                  "new": false
                 },
                 {
-                  "id": "threat-e-1",
-                  "title": "Несанкционированный вызов API возврата средств / начисления бонусов",
+                  "id": "t1111111-1111-4111-8111-111111111006",
+                  "number": 6,
+                  "title": "Вызов клиентом API администратора для возврата денег или начисления бонусов",
                   "status": "Open",
                   "severity": "High",
                   "type": "Elevation of privilege",
-                  "description": "Клиент напрямую вызывает метод администратора для возврата средств или начисления промо-баланса.",
-                  "mitigation": "Проверка ролей (RBAC) на PEP для каждого запроса и изоляция админ-эндпоинтов.",
-                  "modelType": "STRIDE"
+                  "score": "",
+                  "description": "Клиент обращается к внутреннему методу /api/admin/refund без проверки роли и получает бесплатные заказы.",
+                  "mitigation": "Проверка роли (RBAC) на PEP перед каждым запросом и изоляция административного API.",
+                  "modelType": "STRIDE",
+                  "new": false
                 }
               ]
             }
           },
           {
-            "position": { "x": 300, "y": 260 },
+            "position": { "x": 290, "y": 260 },
             "size": { "width": 120, "height": 120 },
+            "attrs": {
+              "text": { "text": "Сервис курьеров" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Process",
-            "id": "proc-courier-svc",
+            "id": "p1111111-1111-4111-8111-111111111002",
+            "zIndex": 10,
             "data": {
               "name": "Сервис курьеров",
-              "description": "Распределение заказов и маршрутизация (резервируемый узел)",
+              "description": "Назначение курьеров и передача адресов доставки (резервируемый компонент)",
               "type": "tm.Process",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "privilegeLevel": "Service",
+              "hasOpenThreats": true,
               "threats": [
                 {
-                  "id": "threat-i-1",
-                  "title": "IDOR/BOLA: чтение чужих адресов и состава заказов",
+                  "id": "t1111111-1111-4111-8111-111111111004",
+                  "number": 4,
+                  "title": "IDOR в /orders/{id} — выгрузка чужих адресов и состава заказов",
                   "status": "Open",
                   "severity": "High",
                   "type": "Information disclosure",
-                  "description": "Перебор ID заказов в API позволяет выгрузить домашние адреса, телефоны и пищевые привычки клиентов.",
-                  "mitigation": "Проверка прав доступа к заказу на сервере, переход на UUID и скрытие адреса после доставки.",
-                  "modelType": "STRIDE"
+                  "score": "",
+                  "description": "Перебор номеров заказов в API курьеров позволяет получить домашние адреса, коды домофонов и привычки питания клиентов.",
+                  "mitigation": "Проверка владельца/назначенного курьера на сервере, переход на UUID и скрытие адреса после доставки.",
+                  "modelType": "STRIDE",
+                  "new": false
                 }
               ]
             }
           },
           {
-            "position": { "x": 540, "y": 50 },
-            "size": { "width": 140, "height": 60 },
+            "position": { "x": 560, "y": 60 },
+            "size": { "width": 160, "height": 65 },
+            "attrs": {
+              "text": { "text": "БД заказов" },
+              "topLine": { "stroke": "#333333", "strokeWidth": 1.5 },
+              "bottomLine": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Store",
-            "id": "store-orders",
+            "id": "s1111111-1111-4111-8111-111111111001",
+            "zIndex": 10,
             "data": {
               "name": "БД заказов",
-              "description": "Хранение активных и архивных заказов",
+              "description": "Хранилище текущих и завершённых заказов",
               "type": "tm.Store",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": false,
               "isEncrypted": true,
+              "isSigned": false,
+              "hasOpenThreats": false,
               "threats": []
             }
           },
           {
-            "position": { "x": 540, "y": 150 },
-            "size": { "width": 140, "height": 60 },
+            "position": { "x": 560, "y": 170 },
+            "size": { "width": 160, "height": 65 },
+            "attrs": {
+              "text": { "text": "БД клиентов" },
+              "topLine": { "stroke": "#333333", "strokeWidth": 1.5 },
+              "bottomLine": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Store",
-            "id": "store-clients",
+            "id": "s1111111-1111-4111-8111-111111111002",
+            "zIndex": 10,
             "data": {
               "name": "БД клиентов",
-              "description": "Адреса доставки и история предпочтений",
+              "description": "Адреса, телефоны и пищевые привычки клиентов",
               "type": "tm.Store",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": false,
               "isEncrypted": true,
-              "threats": [
-                {
-                  "id": "threat-linddun-1",
-                  "title": "Профилирование привычек и расписания жизни клиента по истории заказов",
-                  "status": "Open",
-                  "severity": "High",
-                  "type": "Information disclosure",
-                  "description": "Связывание истории заказов за долгое время раскрывает состояние здоровья, религию и время отсутствия дома.",
-                  "mitigation": "Разделение баз, псевдонимизация архивных заказов для аналитики и автоудаление старых записей.",
-                  "modelType": "STRIDE"
-                }
-              ]
-            }
-          },
-          {
-            "position": { "x": 540, "y": 250 },
-            "size": { "width": 140, "height": 60 },
-            "shape": "tm.Store",
-            "id": "store-audit",
-            "data": {
-              "name": "Журнал аудита",
-              "description": "Лог создания, оплаты и отмены заказов",
-              "type": "tm.Store",
-              "isALog": true,
-              "isEncrypted": true,
+              "isSigned": false,
+              "hasOpenThreats": false,
               "threats": []
             }
           },
           {
-            "position": { "x": 540, "y": 380 },
-            "size": { "width": 140, "height": 60 },
+            "position": { "x": 560, "y": 280 },
+            "size": { "width": 160, "height": 65 },
+            "attrs": {
+              "text": { "text": "Журнал аудита" },
+              "topLine": { "stroke": "#333333", "strokeWidth": 1.5 },
+              "bottomLine": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
+            "shape": "tm.Store",
+            "id": "s1111111-1111-4111-8111-111111111003",
+            "zIndex": 10,
+            "data": {
+              "name": "Журнал аудита",
+              "description": "Журнал операций оплаты, вручения и возврата",
+              "type": "tm.Store",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": true,
+              "isEncrypted": true,
+              "isSigned": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 565, "y": 490 },
+            "size": { "width": 160, "height": 70 },
+            "attrs": {
+              "text": { "text": "Платёжный шлюз" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
             "shape": "tm.Actor",
-            "id": "actor-payment",
+            "id": "a1111111-1111-4111-8111-111111111003",
+            "zIndex": 10,
             "data": {
               "name": "Платёжный шлюз",
-              "description": "Внешний провайдер оплаты и возврата денег",
+              "description": "Внешний сервис списания и возврата денег по картам",
               "type": "tm.Actor",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "providesAuthentication": false,
+              "hasOpenThreats": false,
               "threats": []
             }
           },
           {
             "shape": "tm.Flow",
-            "id": "flow-client-api",
-            "source": { "cell": "actor-client" },
-            "target": { "cell": "proc-api" },
+            "id": "f1111111-1111-4111-8111-111111111001",
+            "zIndex": 10,
+            "source": { "cell": "a1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#FF0000",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Заказ и токен оплаты"],
             "data": {
-              "name": "Оформление заказа (HTTPS)",
+              "name": "Заказ и токен оплаты",
+              "description": "HTTPS-запрос создания и отмены заказа из публичной сети",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": true,
-              "type": "tm.Flow",
+              "isBidirectional": true,
+              "hasOpenThreats": true,
               "threats": [
                 {
-                  "id": "threat-t-1",
-                  "title": "Подмена payment_token или цены заказа в запросе",
+                  "id": "t1111111-1111-4111-8111-111111111002",
+                  "number": 2,
+                  "title": "Подмена payment_token или стоимости в запросе создания заказа",
                   "status": "Open",
                   "severity": "Critical",
                   "type": "Tampering",
-                  "description": "Атакующий подменяет идентификатор привязанной карты/плательщика в запросе к API и заказывает еду за чужой счёт.",
-                  "mitigation": "Строгая привязка payment_token к user_id сессии на сервере и расчёт стоимости только на бэкенде.",
-                  "modelType": "STRIDE"
+                  "score": "",
+                  "description": "Атакующий подменяет идентификатор плательщика/карты в теле запроса к API и оплачивает еду за чужой счёт.",
+                  "mitigation": "Проверка принадлежности payment_token текущему user_id на сервере (PEP) и расчёт суммы только на бэкенде.",
+                  "modelType": "STRIDE",
+                  "new": false
                 }
               ]
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f1111111-1111-4111-8111-111111111002",
+            "zIndex": 10,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "p1111111-1111-4111-8111-111111111002" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Передача в доставку"],
+            "data": {
+              "name": "Передача в доставку",
+              "description": "Внутренний вызов назначения курьера",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "HTTPS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": false,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f1111111-1111-4111-8111-111111111003",
+            "zIndex": 10,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111002" },
+            "target": { "cell": "a1111111-1111-4111-8111-111111111002" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Маршрут и адрес"],
+            "data": {
+              "name": "Маршрут и адрес",
+              "description": "Передача карточки заказа курьеру через интернет",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "HTTPS",
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "isBidirectional": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f1111111-1111-4111-8111-111111111004",
+            "zIndex": 10,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "s1111111-1111-4111-8111-111111111001" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Данные заказов"],
+            "data": {
+              "name": "Данные заказов",
+              "description": "Чтение и запись заказов",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "TLS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f1111111-1111-4111-8111-111111111005",
+            "zIndex": 10,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "s1111111-1111-4111-8111-111111111002" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Профиль и адрес"],
+            "data": {
+              "name": "Профиль и адрес",
+              "description": "Запрос адреса доставки и истории предпочтений",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "TLS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f1111111-1111-4111-8111-111111111006",
+            "zIndex": 10,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "s1111111-1111-4111-8111-111111111003" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Лог операций"],
+            "data": {
+              "name": "Лог операций",
+              "description": "Запись событий создания, оплаты и отмены заказа",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "TLS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": false,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f1111111-1111-4111-8111-111111111007",
+            "zIndex": 10,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "a1111111-1111-4111-8111-111111111003" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Оплата / Возврат"],
+            "data": {
+              "name": "Оплата / Возврат",
+              "description": "Вызов внешнего платёжного шлюза для списания и возврата средств",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "HTTPS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Доставка еды: LINDDUN",
+        "diagramType": "LINDDUN",
+        "placeholder": "Модель угроз приватности LINDDUN (адреса и привычки клиентов)",
+        "thumbnail": "./public/content/images/thumbnail.linddun.jpg",
+        "version": "2.6.2",
+        "cells": [
+          {
+            "position": { "x": 240, "y": 30 },
+            "size": { "width": 520, "height": 320 },
+            "attrs": {
+              "text": { "text": "Облачный контур доставки" },
+              "header": { "fill": "transparent" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": "5 5" }
+            },
+            "visible": true,
+            "shape": "tm.BoundaryBox",
+            "id": "b2222222-2222-4222-8222-222222222001",
+            "zIndex": 1,
+            "data": {
+              "name": "Облачный контур доставки",
+              "description": "Граница доверия ЦОД сервиса доставки",
+              "type": "tm.BoundaryBox",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 40, "y": 80 },
+            "size": { "width": 140, "height": 70 },
+            "attrs": {
+              "text": { "text": "Клиент" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5 }
+            },
+            "visible": true,
+            "shape": "tm.Actor",
+            "id": "a2222222-2222-4222-8222-222222222001",
+            "zIndex": 10,
+            "data": {
+              "name": "Клиент",
+              "description": "Субъект персональных данных (адреса и привычки питания)",
+              "type": "tm.Actor",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "providesAuthentication": false,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "t2222222-2222-4222-8222-222222222010",
+                  "number": 10,
+                  "title": "Клиент не знает о передаче его привычек рекламным партнёрам",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Unawareness",
+                  "score": "",
+                  "description": "История заказов и адреса передаются внешним маркетинговым сетям без прозрачного уведомления.",
+                  "mitigation": "Явное раздельное согласие и кабинет управления своими данными в приложении.",
+                  "modelType": "LINDDUN",
+                  "new": false
+                }
+              ]
+            }
+          },
+          {
+            "position": { "x": 40, "y": 240 },
+            "size": { "width": 140, "height": 70 },
+            "attrs": {
+              "text": { "text": "Курьер" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
+            "shape": "tm.Actor",
+            "id": "a2222222-2222-4222-8222-222222222002",
+            "zIndex": 10,
+            "data": {
+              "name": "Курьер",
+              "description": "Внешний исполнитель, получающий адрес и заказ",
+              "type": "tm.Actor",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "providesAuthentication": false,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 290, "y": 140 },
+            "size": { "width": 120, "height": 120 },
+            "attrs": {
+              "text": { "text": "Сервис курьеров" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5 }
+            },
+            "visible": true,
+            "shape": "tm.Process",
+            "id": "p2222222-2222-4222-8222-222222222001",
+            "zIndex": 10,
+            "data": {
+              "name": "Сервис курьеров",
+              "description": "Формирование карточки доставки и push-уведомлений",
+              "type": "tm.Process",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "privilegeLevel": "Service",
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 560, "y": 170 },
+            "size": { "width": 160, "height": 65 },
+            "attrs": {
+              "text": { "text": "БД клиентов" },
+              "topLine": { "stroke": "#FF0000", "strokeWidth": 1.5 },
+              "bottomLine": { "stroke": "#FF0000", "strokeWidth": 1.5 }
+            },
+            "visible": true,
+            "shape": "tm.Store",
+            "id": "s2222222-2222-4222-8222-222222222001",
+            "zIndex": 10,
+            "data": {
+              "name": "БД клиентов",
+              "description": "История адресов и заказов клиента за все годы",
+              "type": "tm.Store",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": false,
+              "isEncrypted": true,
+              "isSigned": false,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "t2222222-2222-4222-8222-222222222008",
+                  "number": 8,
+                  "title": "Заказы разных лет связываются в профиль привычек, здоровья и религии",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Linkability",
+                  "score": "",
+                  "description": "По единому user_id видна вся история питания, время присутствия дома и адреса клиента.",
+                  "mitigation": "Псевдонимизация для аналитики, разделение БД профилей и БД заказов.",
+                  "modelType": "LINDDUN",
+                  "new": false
+                },
+                {
+                  "id": "t2222222-2222-4222-8222-222222222009",
+                  "number": 9,
+                  "title": "Бессрочное хранение старых адресов и истории заказов",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Non-compliance",
+                  "score": "",
+                  "description": "Детальная история заказов и старые адреса не удаляются после достижения цели обработки.",
+                  "mitigation": "Регламент сроков хранения и автоматическое обезличивание заказов старше 90 дней.",
+                  "modelType": "LINDDUN",
+                  "new": false
+                }
+              ]
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f2222222-2222-4222-8222-222222222001",
+            "zIndex": 10,
+            "source": { "cell": "p2222222-2222-4222-8222-222222222001" },
+            "target": { "cell": "a2222222-2222-4222-8222-222222222001" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#FF0000",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Push-уведомление и чек"],
+            "data": {
+              "name": "Push-уведомление и чек",
+              "description": "Уведомление о доставке на экран блокировки смартфона",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "HTTPS",
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "isBidirectional": false,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "t2222222-2222-4222-8222-222222222007",
+                  "number": 7,
+                  "title": "Текст push-уведомления и чека раскрывает привычки и состав заказа посторонним",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Detectability",
+                  "score": "",
+                  "description": "На экране блокировки или внешнем чеке пакета виден специфический состав заказа (диет-меню, аптека, алкоголь) и квартира.",
+                  "mitigation": "Нейтральный текст push-уведомления («Курьер прибудет через 10 мин») и закрытая упаковка без перечня позиций снаружи.",
+                  "modelType": "LINDDUN",
+                  "new": false
+                }
+              ]
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f2222222-2222-4222-8222-222222222002",
+            "zIndex": 10,
+            "source": { "cell": "p2222222-2222-4222-8222-222222222001" },
+            "target": { "cell": "a2222222-2222-4222-8222-222222222002" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Карточка доставки"],
+            "data": {
+              "name": "Карточка доставки",
+              "description": "Передача адреса курьеру на время выполнения заказа",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "HTTPS",
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "isBidirectional": false,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "f2222222-2222-4222-8222-222222222003",
+            "zIndex": 10,
+            "source": { "cell": "p2222222-2222-4222-8222-222222222001" },
+            "target": { "cell": "s2222222-2222-4222-8222-222222222001" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" }
+              }
+            },
+            "labels": ["Запрос адреса"],
+            "data": {
+              "name": "Запрос адреса",
+              "description": "Чтение данных доставки из БД клиентов",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "TLS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": true,
+              "hasOpenThreats": false,
+              "threats": []
             }
           }
         ]
       }
-    ]
+    ],
+    "diagramTop": 2,
+    "reviewer": "Преподаватель",
+    "threatTop": 10
   }
 }
