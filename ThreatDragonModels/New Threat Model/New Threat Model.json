@@ -3,9 +3,9 @@
   "release_version": "",
   "released_at": "",
   "summary": {
-    "title": "Вариант 11 — Доставка еды",
-    "owner": "Практика, неделя 6 (Вариант 11)",
-    "description": "Учебная модель угроз сервиса доставки еды. Нарушители: внешний злоумышленник и недобросовестный пользователь. Цель атакующего: заказывать еду за чужой счёт. Персональные данные: адреса и привычки клиентов.",
+    "title": "New Threat Model",
+    "owner": "Практика, неделя 6 (Вариант 11 — Доставка еды)",
+    "description": "Вариант 11 — Сервис доставки еды. Нарушители: внешний злоумышленник и недобросовестный пользователь. Цель атакующего: заказывать еду за чужой счёт. Персональные данные: адреса и привычки клиентов.",
     "id": 0
   },
   "detail": {
@@ -19,18 +19,18 @@
         "id": 0,
         "title": "Доставка еды: STRIDE",
         "diagramType": "STRIDE",
-        "placeholder": "Модель угроз STRIDE для сервиса доставки еды (Вариант 11)",
+        "placeholder": "Модель угроз STRIDE (Вариант 11)",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "version": "2.6.2",
         "cells": [
           {
-            "position": { "x": 250, "y": 30 },
-            "size": { "width": 520, "height": 390 },
+            "position": { "x": 240, "y": 20 },
+            "size": { "width": 540, "height": 400 },
             "attrs": {
-              "text": { "text": "Облачный контур доставки" }
+              "label": { "text": "Облачный контур доставки" }
             },
             "visible": true,
-            "shape": "tm.BoundaryBox",
+            "shape": "trust-boundary-box",
             "id": "b1111111-1111-4111-8111-111111111001",
             "zIndex": 1,
             "data": {
@@ -42,13 +42,13 @@
             }
           },
           {
-            "position": { "x": 520, "y": 450 },
-            "size": { "width": 250, "height": 130 },
+            "position": { "x": 510, "y": 450 },
+            "size": { "width": 270, "height": 140 },
             "attrs": {
-              "text": { "text": "Внешний платёжный провайдер" }
+              "label": { "text": "Внешний платёжный провайдер" }
             },
             "visible": true,
-            "shape": "tm.BoundaryBox",
+            "shape": "trust-boundary-box",
             "id": "b1111111-1111-4111-8111-111111111002",
             "zIndex": 1,
             "data": {
@@ -63,10 +63,11 @@
             "position": { "x": 40, "y": 80 },
             "size": { "width": 140, "height": 70 },
             "attrs": {
-              "text": { "text": "Клиент" }
+              "text": { "text": "Клиент" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Actor",
+            "shape": "actor",
             "id": "a1111111-1111-4111-8111-111111111001",
             "zIndex": 10,
             "data": {
@@ -99,10 +100,11 @@
             "position": { "x": 40, "y": 280 },
             "size": { "width": 140, "height": 70 },
             "attrs": {
-              "text": { "text": "Курьер" }
+              "text": { "text": "Курьер" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Actor",
+            "shape": "actor",
             "id": "a1111111-1111-4111-8111-111111111002",
             "zIndex": 10,
             "data": {
@@ -119,12 +121,13 @@
           },
           {
             "position": { "x": 290, "y": 70 },
-            "size": { "width": 130, "height": 130 },
+            "size": { "width": 120, "height": 120 },
             "attrs": {
-              "text": { "text": "API приложения" }
+              "text": { "text": "API приложения" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Process",
+            "shape": "process",
             "id": "p1111111-1111-4111-8111-111111111001",
             "zIndex": 10,
             "data": {
@@ -181,12 +184,13 @@
           },
           {
             "position": { "x": 290, "y": 260 },
-            "size": { "width": 130, "height": 130 },
+            "size": { "width": 120, "height": 120 },
             "attrs": {
-              "text": { "text": "Сервис курьеров" }
+              "text": { "text": "Сервис курьеров" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Process",
+            "shape": "process",
             "id": "p1111111-1111-4111-8111-111111111002",
             "zIndex": 10,
             "data": {
@@ -219,10 +223,12 @@
             "position": { "x": 560, "y": 60 },
             "size": { "width": 160, "height": 65 },
             "attrs": {
-              "text": { "text": "БД заказов" }
+              "text": { "text": "БД заказов" },
+              "topLine": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null },
+              "bottomLine": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Store",
+            "shape": "store",
             "id": "s1111111-1111-4111-8111-111111111001",
             "zIndex": 10,
             "data": {
@@ -243,10 +249,12 @@
             "position": { "x": 560, "y": 170 },
             "size": { "width": 160, "height": 65 },
             "attrs": {
-              "text": { "text": "БД клиентов" }
+              "text": { "text": "БД клиентов" },
+              "topLine": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null },
+              "bottomLine": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Store",
+            "shape": "store",
             "id": "s1111111-1111-4111-8111-111111111002",
             "zIndex": 10,
             "data": {
@@ -267,10 +275,12 @@
             "position": { "x": 560, "y": 280 },
             "size": { "width": 160, "height": 65 },
             "attrs": {
-              "text": { "text": "Журнал аудита" }
+              "text": { "text": "Журнал аудита" },
+              "topLine": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null },
+              "bottomLine": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Store",
+            "shape": "store",
             "id": "s1111111-1111-4111-8111-111111111003",
             "zIndex": 10,
             "data": {
@@ -291,10 +301,11 @@
             "position": { "x": 565, "y": 490 },
             "size": { "width": 160, "height": 70 },
             "attrs": {
-              "text": { "text": "Платёжный шлюз" }
+              "text": { "text": "Платёжный шлюз" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Actor",
+            "shape": "actor",
             "id": "a1111111-1111-4111-8111-111111111003",
             "zIndex": 10,
             "data": {
@@ -310,25 +321,36 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f1111111-1111-4111-8111-111111111001",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "a1111111-1111-4111-8111-111111111001" },
             "target": { "cell": "p1111111-1111-4111-8111-111111111001" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Заказ и токен оплаты" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#FF0000",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Заказ и токен оплаты (HTTPS)"],
             "data": {
               "name": "Заказ и токен оплаты",
               "description": "HTTPS-запрос создания и отмены заказа из публичной сети",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": true,
-              "isBidirectional": true,
+              "isBidirectional": false,
               "hasOpenThreats": true,
               "threats": [
                 {
@@ -348,21 +370,32 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f1111111-1111-4111-8111-111111111002",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
             "target": { "cell": "p1111111-1111-4111-8111-111111111002" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Передача в доставку" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Передача в доставку"],
             "data": {
               "name": "Передача в доставку",
               "description": "Внутренний вызов назначения курьера",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": false,
@@ -372,93 +405,67 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f1111111-1111-4111-8111-111111111003",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p1111111-1111-4111-8111-111111111002" },
             "target": { "cell": "a1111111-1111-4111-8111-111111111002" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Маршрут и адрес" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Маршрут и адрес"],
             "data": {
               "name": "Маршрут и адрес",
               "description": "Передача карточки заказа курьеру через интернет",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": true,
-              "isBidirectional": true,
+              "isBidirectional": false,
               "hasOpenThreats": false,
               "threats": []
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f1111111-1111-4111-8111-111111111004",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
             "target": { "cell": "s1111111-1111-4111-8111-111111111001" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Данные заказов" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Данные заказов"],
             "data": {
               "name": "Данные заказов",
               "description": "Чтение и запись заказов",
               "type": "tm.Flow",
-              "protocol": "TLS",
-              "isEncrypted": true,
-              "isPublicNetwork": false,
-              "isBidirectional": true,
-              "hasOpenThreats": false,
-              "threats": []
-            }
-          },
-          {
-            "shape": "tm.Flow",
-            "id": "f1111111-1111-4111-8111-111111111005",
-            "zIndex": 10,
-            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
-            "target": { "cell": "s1111111-1111-4111-8111-111111111002" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Профиль и адрес" } }
-              }
-            ],
-            "data": {
-              "name": "Профиль и адрес",
-              "description": "Запрос адреса доставки и истории предпочтений",
-              "type": "tm.Flow",
-              "protocol": "TLS",
-              "isEncrypted": true,
-              "isPublicNetwork": false,
-              "isBidirectional": true,
-              "hasOpenThreats": false,
-              "threats": []
-            }
-          },
-          {
-            "shape": "tm.Flow",
-            "id": "f1111111-1111-4111-8111-111111111006",
-            "zIndex": 10,
-            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
-            "target": { "cell": "s1111111-1111-4111-8111-111111111003" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Лог операций" } }
-              }
-            ],
-            "data": {
-              "name": "Лог операций",
-              "description": "Запись событий создания, оплаты и отмены заказа",
-              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "TLS",
               "isEncrypted": true,
               "isPublicNetwork": false,
@@ -468,25 +475,106 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
+            "id": "f1111111-1111-4111-8111-111111111005",
+            "zIndex": 10,
+            "width": 200,
+            "height": 100,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "s1111111-1111-4111-8111-111111111002" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
+              }
+            },
+            "labels": ["Профиль и адрес"],
+            "data": {
+              "name": "Профиль и адрес",
+              "description": "Запрос адреса доставки и истории предпочтений",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "TLS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": false,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "flow",
+            "id": "f1111111-1111-4111-8111-111111111006",
+            "zIndex": 10,
+            "width": 200,
+            "height": 100,
+            "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
+            "target": { "cell": "s1111111-1111-4111-8111-111111111003" },
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
+              }
+            },
+            "labels": ["Лог операций"],
+            "data": {
+              "name": "Лог операций",
+              "description": "Запись событий создания, оплаты и отмены заказа",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "protocol": "TLS",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "isBidirectional": false,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "flow",
             "id": "f1111111-1111-4111-8111-111111111007",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p1111111-1111-4111-8111-111111111001" },
             "target": { "cell": "a1111111-1111-4111-8111-111111111003" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Оплата / Возврат" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Оплата / Возврат"],
             "data": {
               "name": "Оплата / Возврат",
               "description": "Вызов внешнего платёжного шлюза для списания и возврата средств",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": false,
-              "isBidirectional": true,
+              "isBidirectional": false,
               "hasOpenThreats": false,
               "threats": []
             }
@@ -502,13 +590,13 @@
         "version": "2.6.2",
         "cells": [
           {
-            "position": { "x": 250, "y": 30 },
+            "position": { "x": 240, "y": 30 },
             "size": { "width": 520, "height": 320 },
             "attrs": {
-              "text": { "text": "Облачный контур доставки" }
+              "label": { "text": "Облачный контур доставки" }
             },
             "visible": true,
-            "shape": "tm.BoundaryBox",
+            "shape": "trust-boundary-box",
             "id": "b2222222-2222-4222-8222-222222222001",
             "zIndex": 1,
             "data": {
@@ -523,10 +611,11 @@
             "position": { "x": 40, "y": 80 },
             "size": { "width": 140, "height": 70 },
             "attrs": {
-              "text": { "text": "Клиент" }
+              "text": { "text": "Клиент" },
+              "body": { "stroke": "#FF0000", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Actor",
+            "shape": "actor",
             "id": "a2222222-2222-4222-8222-222222222001",
             "zIndex": 10,
             "data": {
@@ -559,10 +648,11 @@
             "position": { "x": 40, "y": 240 },
             "size": { "width": 140, "height": 70 },
             "attrs": {
-              "text": { "text": "Курьер" }
+              "text": { "text": "Курьер" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Actor",
+            "shape": "actor",
             "id": "a2222222-2222-4222-8222-222222222002",
             "zIndex": 10,
             "data": {
@@ -579,12 +669,13 @@
           },
           {
             "position": { "x": 290, "y": 140 },
-            "size": { "width": 130, "height": 130 },
+            "size": { "width": 120, "height": 120 },
             "attrs": {
-              "text": { "text": "Сервис курьеров" }
+              "text": { "text": "Сервис курьеров" },
+              "body": { "stroke": "#333333", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Process",
+            "shape": "process",
             "id": "p2222222-2222-4222-8222-222222222001",
             "zIndex": 10,
             "data": {
@@ -603,10 +694,12 @@
             "position": { "x": 560, "y": 170 },
             "size": { "width": 160, "height": 65 },
             "attrs": {
-              "text": { "text": "БД клиентов" }
+              "text": { "text": "БД клиентов" },
+              "topLine": { "stroke": "#FF0000", "strokeWidth": 1.5, "strokeDasharray": null },
+              "bottomLine": { "stroke": "#FF0000", "strokeWidth": 1.5, "strokeDasharray": null }
             },
             "visible": true,
-            "shape": "tm.Store",
+            "shape": "store",
             "id": "s2222222-2222-4222-8222-222222222001",
             "zIndex": 10,
             "data": {
@@ -651,21 +744,32 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f2222222-2222-4222-8222-222222222001",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p2222222-2222-4222-8222-222222222001" },
             "target": { "cell": "a2222222-2222-4222-8222-222222222001" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Push-уведомление и чек" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#FF0000",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Push-уведомление и чек"],
             "data": {
               "name": "Push-уведомление и чек",
               "description": "Уведомление о доставке на экран блокировки смартфона",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": true,
@@ -689,21 +793,32 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f2222222-2222-4222-8222-222222222002",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p2222222-2222-4222-8222-222222222001" },
             "target": { "cell": "a2222222-2222-4222-8222-222222222002" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Карточка доставки" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Карточка доставки"],
             "data": {
               "name": "Карточка доставки",
               "description": "Передача адреса курьеру на время выполнения заказа",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "HTTPS",
               "isEncrypted": true,
               "isPublicNetwork": true,
@@ -713,25 +828,36 @@
             }
           },
           {
-            "shape": "tm.Flow",
+            "shape": "flow",
             "id": "f2222222-2222-4222-8222-222222222003",
             "zIndex": 10,
+            "width": 200,
+            "height": 100,
             "source": { "cell": "p2222222-2222-4222-8222-222222222001" },
             "target": { "cell": "s2222222-2222-4222-8222-222222222001" },
-            "labels": [
-              {
-                "position": 0.5,
-                "attrs": { "label": { "text": "Запрос адреса" } }
+            "vertices": [],
+            "connector": "smooth",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "targetMarker": { "name": "block" },
+                "sourceMarker": { "name": "" },
+                "strokeDasharray": null
               }
-            ],
+            },
+            "labels": ["Запрос адреса"],
             "data": {
               "name": "Запрос адреса",
               "description": "Чтение данных доставки из БД клиентов",
               "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
               "protocol": "TLS",
               "isEncrypted": true,
               "isPublicNetwork": false,
-              "isBidirectional": true,
+              "isBidirectional": false,
               "hasOpenThreats": false,
               "threats": []
             }
