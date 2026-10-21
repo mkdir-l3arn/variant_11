@@ -1,0 +1,217 @@
+{
+  "version": "2.2.0",
+  "summary": {
+    "title": "Вариант 11 — Сервис доставки еды",
+    "owner": "Студент (Вариант 11)",
+    "description": "Учебная модель угроз сервиса доставки еды (STRIDE + LINDDUN). Цель нарушителя: заказывать еду за чужой счёт. Защищаемые ПДн: адреса и привычки клиентов.",
+    "id": 11
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "Группа"
+      }
+    ],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "Доставка еды: STRIDE",
+        "diagramType": "STRIDE",
+        "placeholder": "Диаграмма STRIDE для варианта 11",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.2.0",
+        "cells": [
+          {
+            "position": { "x": 40, "y": 80 },
+            "size": { "width": 130, "height": 60 },
+            "shape": "tm.Actor",
+            "id": "actor-client",
+            "data": {
+              "name": "Клиент",
+              "description": "Заказчик еды в мобильном или веб-приложении",
+              "type": "tm.Actor",
+              "threats": [
+                {
+                  "id": "threat-s-1",
+                  "title": "Захват аккаунта с привязанной картой (Credential Stuffing)",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "Злоумышленник подбирает пароль к аккаунту клиента и оформляет заказ еды за его счёт на свой адрес.",
+                  "mitigation": "Вход через Passkey/WebAuthn и обязательный Step-up MFA при смене адреса доставки.",
+                  "modelType": "STRIDE"
+                }
+              ]
+            }
+          },
+          {
+            "position": { "x": 40, "y": 260 },
+            "size": { "width": 130, "height": 60 },
+            "shape": "tm.Actor",
+            "id": "actor-courier",
+            "data": {
+              "name": "Курьер",
+              "description": "Исполнитель доставки с курьерским приложением",
+              "type": "tm.Actor",
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 300, "y": 80 },
+            "size": { "width": 120, "height": 120 },
+            "shape": "tm.Process",
+            "id": "proc-api",
+            "data": {
+              "name": "API приложения",
+              "description": "Приём заказов и отмена с возвратом денег",
+              "type": "tm.Process",
+              "threats": [
+                {
+                  "id": "threat-r-1",
+                  "title": "Отказ от факта получения заказа при возврате денег",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Repudiation",
+                  "description": "Клиент вызывает отмену заказа с возвратом средств после фактического получения еды, отрицая доставку.",
+                  "mitigation": "Журнал аудита (WORM), подтверждение вручения одноразовым PIN-кодом клиента и фотофиксация.",
+                  "modelType": "STRIDE"
+                },
+                {
+                  "id": "threat-d-1",
+                  "title": "Массовое создание фейковых заказов ботами",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Denial of service",
+                  "description": "Боты создают тысячи заказов, блокируя всех доступных курьеров и перегружая API.",
+                  "mitigation": "Rate limiting на API Gateway, капча и лимит активных заказов на пользователя.",
+                  "modelType": "STRIDE"
+                },
+                {
+                  "id": "threat-e-1",
+                  "title": "Несанкционированный вызов API возврата средств / начисления бонусов",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Elevation of privilege",
+                  "description": "Клиент напрямую вызывает метод администратора для возврата средств или начисления промо-баланса.",
+                  "mitigation": "Проверка ролей (RBAC) на PEP для каждого запроса и изоляция админ-эндпоинтов.",
+                  "modelType": "STRIDE"
+                }
+              ]
+            }
+          },
+          {
+            "position": { "x": 300, "y": 260 },
+            "size": { "width": 120, "height": 120 },
+            "shape": "tm.Process",
+            "id": "proc-courier-svc",
+            "data": {
+              "name": "Сервис курьеров",
+              "description": "Распределение заказов и маршрутизация (резервируемый узел)",
+              "type": "tm.Process",
+              "threats": [
+                {
+                  "id": "threat-i-1",
+                  "title": "IDOR/BOLA: чтение чужих адресов и состава заказов",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "Перебор ID заказов в API позволяет выгрузить домашние адреса, телефоны и пищевые привычки клиентов.",
+                  "mitigation": "Проверка прав доступа к заказу на сервере, переход на UUID и скрытие адреса после доставки.",
+                  "modelType": "STRIDE"
+                }
+              ]
+            }
+          },
+          {
+            "position": { "x": 540, "y": 50 },
+            "size": { "width": 140, "height": 60 },
+            "shape": "tm.Store",
+            "id": "store-orders",
+            "data": {
+              "name": "БД заказов",
+              "description": "Хранение активных и архивных заказов",
+              "type": "tm.Store",
+              "isEncrypted": true,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 540, "y": 150 },
+            "size": { "width": 140, "height": 60 },
+            "shape": "tm.Store",
+            "id": "store-clients",
+            "data": {
+              "name": "БД клиентов",
+              "description": "Адреса доставки и история предпочтений",
+              "type": "tm.Store",
+              "isEncrypted": true,
+              "threats": [
+                {
+                  "id": "threat-linddun-1",
+                  "title": "Профилирование привычек и расписания жизни клиента по истории заказов",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "Связывание истории заказов за долгое время раскрывает состояние здоровья, религию и время отсутствия дома.",
+                  "mitigation": "Разделение баз, псевдонимизация архивных заказов для аналитики и автоудаление старых записей.",
+                  "modelType": "STRIDE"
+                }
+              ]
+            }
+          },
+          {
+            "position": { "x": 540, "y": 250 },
+            "size": { "width": 140, "height": 60 },
+            "shape": "tm.Store",
+            "id": "store-audit",
+            "data": {
+              "name": "Журнал аудита",
+              "description": "Лог создания, оплаты и отмены заказов",
+              "type": "tm.Store",
+              "isALog": true,
+              "isEncrypted": true,
+              "threats": []
+            }
+          },
+          {
+            "position": { "x": 540, "y": 380 },
+            "size": { "width": 140, "height": 60 },
+            "shape": "tm.Actor",
+            "id": "actor-payment",
+            "data": {
+              "name": "Платёжный шлюз",
+              "description": "Внешний провайдер оплаты и возврата денег",
+              "type": "tm.Actor",
+              "threats": []
+            }
+          },
+          {
+            "shape": "tm.Flow",
+            "id": "flow-client-api",
+            "source": { "cell": "actor-client" },
+            "target": { "cell": "proc-api" },
+            "data": {
+              "name": "Оформление заказа (HTTPS)",
+              "protocol": "HTTPS",
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "type": "tm.Flow",
+              "threats": [
+                {
+                  "id": "threat-t-1",
+                  "title": "Подмена payment_token или цены заказа в запросе",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Tampering",
+                  "description": "Атакующий подменяет идентификатор привязанной карты/плательщика в запросе к API и заказывает еду за чужой счёт.",
+                  "mitigation": "Строгая привязка payment_token к user_id сессии на сервере и расчёт стоимости только на бэкенде.",
+                  "modelType": "STRIDE"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
